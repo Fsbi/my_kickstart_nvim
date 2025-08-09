@@ -1,1 +1,1 @@
-Put nvim/ under /home/user/.confi/
+Put nvim/ under /home/user/.config/
