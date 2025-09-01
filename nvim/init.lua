@@ -471,6 +471,13 @@ require("lazy").setup({
 
 	-- LSP Plugins
 	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {
+			check_ts = true,
+		},
+	},
+	{
 		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
 		-- used for completion, annotations and signatures of Neovim apis
 		"folke/lazydev.nvim",
@@ -544,6 +551,10 @@ require("lazy").setup({
 
 					-- Rename the variable under your cursor.
 					--  Most Language Servers support renaming across files, etc.
+					map("gd", function()
+						vim.lsp.buf.definition()
+					end, "[G]oto [D]efinition")
+
 					map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
 
 					-- Execute a code action, usually your cursor needs to be on top of an error
@@ -648,7 +659,7 @@ require("lazy").setup({
 			-- See :help vim.diagnostic.Opts
 			vim.diagnostic.config({
 				severity_sort = true,
-				float = { border = "rounded", source = "if_many" },
+				float = { border = "rounded", wrap = true, max_width = 80, source = "if_many" },
 				underline = { severity = vim.diagnostic.severity.ERROR },
 				signs = vim.g.have_nerd_font and {
 					text = {
@@ -672,6 +683,8 @@ require("lazy").setup({
 					end,
 				},
 			})
+			vim.diagnostic.open_float()
+			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 
 			-- LSP servers and clients are able to communicate to each other what features they support.
 			--  By default, Neovim doesn't support everything that is in the LSP specification.
