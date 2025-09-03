@@ -518,6 +518,8 @@ require("lazy").setup({
 			-- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
 			-- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
 			-- processes that communicate with some "client" - in this case, Neovim!
+			require("lspconfig").ts_ls.setup({})
+
 			--
 			-- LSP provides Neovim with features like:
 			--  - Go to definition
@@ -713,7 +715,7 @@ require("lazy").setup({
 				--    https://github.com/pmizio/typescript-tools.nvim
 				--
 				-- But for many setups, the LSP (`ts_ls`) will work just fine
-				-- ts_ls = {},
+				ts_ls = {},
 				--
 
 				lua_ls = {
